@@ -58,7 +58,6 @@ const getList = async () => {
   const result = await apiServices({
     method: 'POST',
     url: 'admin/list',
-    api: 'http://lazyapibo.inkubo.co/v1/',
     data: form.value,
   })
 
@@ -74,7 +73,7 @@ const getList = async () => {
 </script>
 <template>
   <section class="content-page">
-    <Table
+    <DefaultTable
       :headers="table.headers"
       :fields="table.fields"
       :empty="table.empty"

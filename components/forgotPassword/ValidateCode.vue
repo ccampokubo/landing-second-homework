@@ -1,8 +1,9 @@
 <script setup lang="ts">
-const props = defineProps(['user'])
-const emit = defineEmits(['change'])
 import { ref, onMounted } from 'vue'
 import VOtpInput from 'vue3-otp-input'
+
+const props = defineProps(['user'])
+const emit = defineEmits(['change'])
 
 const otpInput = ref<InstanceType<typeof VOtpInput> | null>(null)
 const bindModal = ref('')
@@ -10,17 +11,17 @@ const time = ref(30)
 const interval = ref()
 
 const handleOnComplete = async (value: string) => {
-  const result = (await apiServices({
-    method: 'POST',
-    url: 'onboarding/verify-code',
-    data: {
-      user: props.user?.user,
-      code: value,
-    },
-  })) as any
+  const result = await useOnboarding().verifyCode({
+    user: props.user?.user,
+    code: value,
+    pushToken: '',
+    platform: 'backoffice',
+    version: '1.0.0',
+  })
 
   if (result.status && result.code === 100) {
     emit('change', { data: props.user, change: 'changePassword' })
+    setLoginUser({ user: null, ...result.data })
     showAlert({
       type: 'success',
       message: result.message,
@@ -48,26 +49,19 @@ const startCount = () => {
 }
 
 const sendCode = async () => {
-  const result = (await apiServices({
-    method: 'POST',
-    url: 'onboarding/password-recovery',
-    data: {
-      user: props.user?.user,
-    },
-  })) as any
+  const result = await useOnboarding().sendCode({
+    user: props.user?.user,
+  })
 
   if (result.status && result.code === 100) {
-    toast.add({
-      severity: 'success',
-      detail: result.message,
-      life: 3000,
+    showAlert({
+      type: 'success',
+      message: result.message,
     })
   } else {
-    toast.add({
-      severity: 'error',
-      summary: '¡Uppss!',
-      detail: result.message,
-      life: 3000,
+    showAlert({
+      type: 'error',
+      message: result.message,
     })
   }
   time.value = 30

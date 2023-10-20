@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from 'vue'
+import { useField, useForm } from 'vee-validate'
+import * as yup from 'yup'
+
 const router = useRouter()
 const { t } = useI18n()
 const props = defineProps(['user'])
 const localePath = useLocalePath()
-import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
 
-const { handleSubmit, errors, resetForm } = useForm({
+const { handleSubmit, errors, meta } = useForm({
   validationSchema: yup.object({
     password: yup
       .string()
@@ -34,32 +35,32 @@ const { value: confirmPassword } = useField('confirmPassword')
 
 const onSubmit = handleSubmit(async (values) => {
   const formData = { ...values }
-  formData.password = enc(formData.password)
-  formData.iv = formData.password.iv
-  formData.password = formData.password.password
-  formData.email = props.user.user
+  const encripPass = enc(formData.password)
+  formData.password = encripPass.password
+  formData.iv = encripPass.iv
 
-  const result = await apiServices({
-    method: 'POST',
-    url: 'onboarding/update-password',
-    data: formData,
-    typeHeader: 'auth',
+  const result = await useOnboarding().updatePassword({
+    ...formData,
+    pushToken: '',
+    version: '1.0.0',
   })
 
   if (result.status && result.code === 100) {
+    showAlert({
+      type: 'success',
+      message: result.message,
+    })
     router.push(localePath({ path: '/' }))
   } else {
-    toast.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: result.message,
-      life: 3000,
+    showAlert({
+      type: 'error',
+      message: result.message,
     })
   }
 })
 </script>
 <template>
-  <form>
+  <form @submit.prevent="onSubmit">
     <nuxt-link class="mb-3" :to="localePath({ path: '/' })">
       <img width="35" src="/icons/arrow.svg" alt="volver"
     /></nuxt-link>
@@ -114,8 +115,10 @@ const onSubmit = handleSubmit(async (values) => {
     </span>
 
     <Button
-      type="submit"
-      class="mt-6 btn active"
+      :type="meta.valid ? 'submit' : 'button'"
+      :disabled="!meta.valid"
+      class="mt-6 btn"
+      :class="{ active: meta.valid }"
       :label="$t('button.confirm')"
     />
   </form>

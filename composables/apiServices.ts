@@ -1,4 +1,5 @@
 import type { UseFetchOptions } from 'nuxt/app'
+import { defu } from 'defu'
 
 interface setting {
   method?: string
@@ -10,19 +11,21 @@ interface setting {
 }
 
 export interface responseApi {
+  success?: boolean
   code: number
   message: string
   data?: object
   status: boolean
+  error?: unknown
 }
 
-export const apiServices = async (setting: setting) => {
+export const apiServices = async (setting: setting): Promise<responseApi> => {
   const nuxtApp = useNuxtApp()
 
   try {
     const config = useRuntimeConfig()
 
-    const userData = useCookie('userData').value
+    const userData = useOnboarding().getLoginUser
 
     if (userData && setting.typeHeader === '') {
       setting.typeHeader = 'auth'
@@ -46,18 +49,21 @@ export const apiServices = async (setting: setting) => {
           ...options.headers,
         }
         options.body = formData
-      } else {
+      } else if (setting.data) {
         options.headers = {
           ...options.headers,
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
         }
+        setting.data = setting.data ? setting.data : {}
         options.body = JSON.stringify(setting.data)
       }
     }
 
     const { data, error } = await useFetch(setting.url, options)
-    if (error.value) {
+
+    if (!data.value) {
       const errorData = error.value
+      clearNuxtData()
 
       if (errorData.statusCode === 404) {
         if (errorData.data.message) {
@@ -110,8 +116,32 @@ export const apiServices = async (setting: setting) => {
 
     return data.value
   } catch (erdataror) {
-    console.log(erdataror)
+    throw erdataror
   }
+}
+
+export function useCustomFetch<T>(
+  url: string | (() => string),
+  options: UseFetchOptions<T> = {},
+) {
+  const defaults: UseFetchOptions<T> = {
+    baseURL: options.baseURL,
+    key: options.key,
+    headers: options.headers,
+
+    onResponse(_ctx) {
+      // _ctx.response._data = new myBusinessResponse(_ctx.response._data)
+    },
+
+    onResponseError(_ctx) {
+      // throw new myBusinessError()
+    },
+  }
+
+  // for nice deep defaults, please use unjs/defu
+  const params = defu(options, defaults)
+
+  return useFetch(url, params)
 }
 
 export const getHeaders = (type: any) => {
@@ -137,19 +167,19 @@ export const getHeaders = (type: any) => {
 
 export const generateAccessToken = async () => {
   const config = useRuntimeConfig()
-  let accessToken = useCookie<string>('accessToken')
+  const accessToken = useCookie<string>('accessToken')
 
   try {
     if (!accessToken.value) {
       const shortName = config.public.SHORT_NAME
 
-      const result = (await apiServices({
+      const result = await apiServices({
         method: 'GET',
         url: `${shortName}/generate-access-token`,
-      })) as any
+      })
 
       if (result.code === 100) {
-        accessToken.value = result.data.accessToken
+        accessToken.value = result.data?.accessToken
       }
     }
   } catch (error) {
@@ -165,8 +195,15 @@ export const setLoginUser = (data: any) => {
 
   userData.value = data.user
   authToken.value = data.authToken
+  useOnboarding().user = data.user
 }
 
-export const logout = () => {
-  setLoginUser({ user: null, authToken: null })
+export const logout = async () => {
+  await apiServices({
+    method: 'POST',
+    url: '/onboarding/logout',
+    typeHeader: 'auth',
+  })
+
+  setLoginUser({ user: undefined, authToken: undefined })
 }

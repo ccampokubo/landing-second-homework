@@ -1,16 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import sass from 'sass'
 export default defineNuxtConfig({
-  cache: {
-    components: true,
-  },
+  ssr: false,
+  devtools: { enabled: true },
 
-  nitro: {
-    compressPublicAssets: true,
-  },
-
-  typescript: {
-    strict: true,
+  imports: {
+    dirs: [
+      'composables',
+      'composables/*/index.{ts,js,mjs,mts}',
+      'composables/**',
+    ],
   },
 
   app: {
@@ -30,53 +28,42 @@ export default defineNuxtConfig({
     },
   },
 
-  imports: {
-    dirs: [
-      // Scan top-level modules
-      'composables',
-      // ... or scan modules nested one level deep with a specific name and file extension
-      'composables/*/index.{ts,js,mjs,mts}',
-      // ... or scan all modules within given directory
-      'composables/**',
-    ],
+  // config envs
+  runtimeConfig: {
+    public: {
+      secret: process.env.SECRET_KEY,
+      API_BASE_URL: process.env.API_URL,
+      SHORT_NAME: process.env.SHORT_NAME,
+    },
   },
 
-  // modules
-  modules: ['@nuxtjs/i18n'],
+  // css
+  css: ['@/assets/scss/main.scss'],
 
-  // buildModules
-  buildModules: [
-    '@nuxtjs/moment',
-    [
-      'nuxt-purgecss',
-      {
-        /* Otras opciones */
-        enabled: true,
-        content: [
-          'components/**/*.vue',
-          'layouts/**/*.vue',
-          'pages/**/*.vue',
-          'plugins/**/*.js',
-          'nuxt.config.ts',
-        ],
-        whitelist: [
-          'p-',
-          'pf-',
-          /-(leave|enter|appear)(|-(to|from|active))$/,
-          /^(?!cursor-move).+-move$/,
-          /data-v-.*/,
-        ],
-        whitelistPatterns: [/prime-/, /p-/, /pf-/],
-      },
-    ],
+  // modules
+  modules: [
+    '@nuxtjs/i18n',
+    '@pinia/nuxt',
+    'nuxt-primevue',
     '@nuxtjs/eslint-module',
   ],
 
-  // eslint
-  eslint: {
-    extend(config) {
-      // Ejemplo: Habilitar reglas adicionales
-      config.rules['vue/no-unused-components'] = 'error'
+  // primevue
+  primevue: {
+    usePrimeVue: true,
+    options: {
+      ripple: true,
+    },
+    components: {
+      include: [
+        'Button',
+        'InputText',
+        'Toast',
+        'DataTable',
+        'Column',
+        'Paginator',
+        'Menu',
+      ],
     },
   },
 
@@ -92,36 +79,5 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'lang/',
     defaultLocale: 'es',
-  },
-
-  // css
-  css: ['~/assets/scss/main.scss'],
-
-  // config envs
-  runtimeConfig: {
-    public: {
-      secret: process.env.SECRET_KEY,
-      API_BASE_URL: process.env.API_URL,
-      SHORT_NAME: process.env.SHORT_NAME,
-    },
-  },
-
-  components: [
-    {
-      path: '~/components',
-      pathPrefix: false,
-    },
-  ],
-
-  build: {
-    transpile: ['primevue', '@nuxtjs/i18n'],
-  },
-
-  setup(build: any) {
-    build.css.preprocessorOptions = {
-      sass: {
-        implementation: sass,
-      },
-    }
   },
 })

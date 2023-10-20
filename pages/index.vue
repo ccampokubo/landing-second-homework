@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
+import { useField, useForm } from 'vee-validate'
+import * as yup from 'yup'
+
+const store = useOnboarding()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
-import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
-import { responseApi } from '~/composables/apiServices'
+
 const loading = useLoading(ref(false))
-const dataTest = ref([])
 
 definePageMeta({ layout: 'login' })
 
-const { handleSubmit, errors, resetForm, meta } = useForm({
+const { handleSubmit, errors, meta } = useForm({
   validationSchema: yup.object({
     email: yup
       .string()
@@ -36,17 +37,11 @@ const onSubmit = handleSubmit(async (values) => {
   formData.platform = 'backoffice'
   formData.version = '1.0.0'
   formData.pushToken = '0'
-  formData.type = 'landing'
+  formData.type = 'lc'
 
-  const result = (await apiServices({
-    method: 'POST',
-    url: 'onboarding/login',
-    data: formData,
-  })) as responseApi
+  const result = await store.login(formData)
 
   if (result.status && result.code === 100) {
-    const data = result.data
-    setLoginUser(data)
     router.push(localePath({ path: '/dashboard' }))
   } else {
     showAlert({

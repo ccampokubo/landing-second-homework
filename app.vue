@@ -1,5 +1,5 @@
 <template>
-  <Loading />
+  <DefaultLoading />
   <NuxtLayout>
     <NuxtPage />
     <Toast position="bottom-left" />

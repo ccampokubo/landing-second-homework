@@ -1,43 +1,43 @@
 @font-face {
-  font-family: "OpenSans-Regular";
-  src: url("/fonts/OpenSans-Regular.ttf");
+  font-family: 'OpenSans-Regular';
+  src: url('/fonts/OpenSans-Regular.ttf');
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "OpenSans-SemiBold";
-  src: url("/fonts/OpenSans-SemiBold.ttf");
+  font-family: 'OpenSans-SemiBold';
+  src: url('/fonts/OpenSans-SemiBold.ttf');
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "OpenSans-Bold";
-  src: url("/fonts/OpenSans-Bold.ttf");
+  font-family: 'OpenSans-Bold';
+  src: url('/fonts/OpenSans-Bold.ttf');
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "BebasNeue-Bold";
-  src: url("/fonts/BebasNeue-Bold.ttf");
+  font-family: 'BebasNeue-Bold';
+  src: url('/fonts/BebasNeue-Bold.ttf');
   font-display: swap;
   font-style: normal;
 }
 
 .opensans-regular {
-  font-family: "OpenSans-Regular" !important;
+  font-family: 'OpenSans-Regular' !important;
 }
 
 .opensans-semibold {
-  font-family: "OpenSans-SemiBold" !important;
+  font-family: 'OpenSans-SemiBold' !important;
 }
 
 .opensans-bold {
-  font-family: "OpenSans-Bold" !important;
+  font-family: 'OpenSans-Bold' !important;
 }
 
 .bebasneue-bold {
-  font-family: "BebasNeue-Bold" !important;
+  font-family: 'BebasNeue-Bold' !important;
 }

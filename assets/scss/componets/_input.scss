@@ -16,7 +16,7 @@
     position: relative;
     z-index: 1;
     font-size: 14px;
-    font-family: "OpenSans-SemiBold" !important;
+    font-family: 'OpenSans-SemiBold' !important;
     color: #000000;
     display: inline-block;
     bottom: -10px;
@@ -25,7 +25,7 @@
   }
   label::after {
     background-color: #fff;
-    content: "";
+    content: '';
     height: 10px;
     left: 0;
     top: 50%;

@@ -1,11 +1,11 @@
 <script setup>
-import { ref, watchEffect, onMounted } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 const localePath = useLocalePath()
 
-const userData = useCookie('userData')
+const userData = useOnboarding().getLoginUser
 
 // variables
 const items = ref([
@@ -34,25 +34,33 @@ const validateRol = (page) => {
 }
 
 onMounted(() => {
-  if (userData.value) {
-    actualPage.value = route.path
-  } else {
-    userData.value = ''
-    router.push(localePath({ path: '/' }))
-  }
+  nextTick(() => {
+    if (userData) {
+      actualPage.value = route.path
+    } else {
+      router.push('/')
+      // router.push(localePath({ path: '/' }))
+    }
+  })
 })
 
-watchEffect(() => {
-  actualPage.value = router.currentRoute.value.path
-  validateRol(actualPage.value)
-})
+watch(
+  () => route.path,
+  (newVal, oldVal) => {
+    const route = validateRol(newVal)
+
+    if (route && oldVal !== newVal) {
+      actualPage.value = newVal
+    }
+  },
+)
 </script>
 <template>
-  <div v-if="userData" class="app-wraper">
+  <div class="app-wraper">
     <aside class="menu-aplication">
       <div class="user-information">
         <img src="/icons/ic_logo.svg" alt="logo" />
-        <p for="fullname">{{ userData.fullname }}</p>
+        <p for="fullname">{{ userData?.fullname }}</p>
       </div>
       <div class="menu-content">
         <nuxt-link
@@ -68,7 +76,7 @@ watchEffect(() => {
     </aside>
     <main class="main-application">
       <nav class="nav-application">
-        <DefaultBreadcrumb />
+        <LayoutsDefaultBreadcrumb :page="actualPage" />
         <div class="flex gap-2"></div>
       </nav>
       <div class="content-application">
