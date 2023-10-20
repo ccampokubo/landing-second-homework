@@ -28,7 +28,7 @@ const table = ref({
 })
 
 const form = ref({
-  limit: 5,
+  limit: 10,
   offset: 0,
   filter: '',
 })
@@ -73,7 +73,7 @@ const getList = async () => {
 </script>
 <template>
   <section class="content-page">
-    <DefaultTable
+    <GeneralTable
       :headers="table.headers"
       :fields="table.fields"
       :empty="table.empty"

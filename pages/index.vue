@@ -45,6 +45,7 @@ const onSubmit = handleSubmit(async (values) => {
     router.push(localePath({ path: '/dashboard' }))
   } else {
     showAlert({
+      type: 'success',
       message: result.message,
     })
   }

@@ -1,5 +1,6 @@
 import type { UseFetchOptions } from 'nuxt/app'
 import { defu } from 'defu'
+import { useOnboarding } from '../stores/Onboarding'
 
 interface setting {
   method?: string
@@ -120,30 +121,6 @@ export const apiServices = async (setting: setting): Promise<responseApi> => {
   }
 }
 
-export function useCustomFetch<T>(
-  url: string | (() => string),
-  options: UseFetchOptions<T> = {},
-) {
-  const defaults: UseFetchOptions<T> = {
-    baseURL: options.baseURL,
-    key: options.key,
-    headers: options.headers,
-
-    onResponse(_ctx) {
-      // _ctx.response._data = new myBusinessResponse(_ctx.response._data)
-    },
-
-    onResponseError(_ctx) {
-      // throw new myBusinessError()
-    },
-  }
-
-  // for nice deep defaults, please use unjs/defu
-  const params = defu(options, defaults)
-
-  return useFetch(url, params)
-}
-
 export const getHeaders = (type: any) => {
   const config = useRuntimeConfig()
   const accessToken = useCookie('accessToken').value
@@ -199,11 +176,7 @@ export const setLoginUser = (data: any) => {
 }
 
 export const logout = async () => {
-  await apiServices({
-    method: 'POST',
-    url: '/onboarding/logout',
-    typeHeader: 'auth',
-  })
+  await useOnboarding().logout()
 
   setLoginUser({ user: undefined, authToken: undefined })
 }

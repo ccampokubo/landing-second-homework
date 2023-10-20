@@ -1,5 +1,5 @@
 <template>
   <section class="content-page">
-    <DefaultPageConstruction />
+    <GeneralPageConstruction />
   </section>
 </template>

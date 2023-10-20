@@ -1,11 +1,12 @@
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue'
 const { t } = useI18n()
+const store = useOnboarding()
 const router = useRouter()
 const route = useRoute()
 const localePath = useLocalePath()
 
-const userData = useOnboarding().getLoginUser
+const userData = store.getLoginUser
 
 // variables
 const items = ref([
@@ -21,6 +22,7 @@ const items = ref([
   },
 ])
 const actualPage = ref('')
+const openLogout = ref(false)
 
 const validateRol = (page) => {
   const item = items.value.filter((item) => page.includes(item.to))
@@ -36,10 +38,10 @@ const validateRol = (page) => {
 onMounted(() => {
   nextTick(() => {
     if (userData) {
+      store.user = userData
       actualPage.value = route.path
     } else {
-      router.push('/')
-      // router.push(localePath({ path: '/' }))
+      router.push(localePath('/'))
     }
   })
 })
@@ -77,11 +79,18 @@ watch(
     <main class="main-application">
       <nav class="nav-application">
         <LayoutsDefaultBreadcrumb :page="actualPage" />
-        <div class="flex gap-2"></div>
+        <div class="flex gap-2">
+          <img
+            src="/img/icons/ic_logout.svg"
+            alt="logout"
+            @click="openLogout = true"
+          />
+        </div>
       </nav>
       <div class="content-application">
         <slot />
       </div>
     </main>
+    <LayoutsLoginLogout :dialog="openLogout" @closeModal="openLogout = false" />
   </div>
 </template>

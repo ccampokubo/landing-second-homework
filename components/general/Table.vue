@@ -1,7 +1,7 @@
 <script setup>
 const route = useRoute()
 const emit = defineEmits(['change-page'])
-const props = defineProps({
+defineProps({
   headers: Array,
   fields: Array,
   empty: String,
@@ -52,7 +52,7 @@ const getGoTo = (_prop, _item) => {
               :to="getGoTo(slotProps, item)"
               >{{ searchField(item.field, slotProps.data) }}</nuxt-link
             >
-            <DefaultTableStatus
+            <GeneralTableStatus
               v-else-if="item.type === 'state'"
               :id="slotProps.data.id"
               :status="searchField(item.field, slotProps.data)"
@@ -64,6 +64,12 @@ const getGoTo = (_prop, _item) => {
             </p>
           </template>
         </Column>
+        <template #loading>
+          <p id="loading-text">{{ $t('table.loading') }}</p>
+        </template>
+        <template #empty>
+          <GeneralEmptyTable :message="empty" />
+        </template>
       </DataTable>
     </div>
     <Paginator :rows="limit" :total-records="pages" @page="onPage($event)" />

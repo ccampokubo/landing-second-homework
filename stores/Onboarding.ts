@@ -60,6 +60,20 @@ export const useOnboarding = defineStore('onboarding', {
 
       return result
     },
+
+    async logout() {
+      const result = await apiServices({
+        method: 'POST',
+        url: '/onboarding/logout',
+        typeHeader: 'auth',
+      })
+
+      if (result.status && result.code === 100) {
+        setLoginUser({ user: undefined, authToken: undefined })
+      }
+
+      return result
+    },
   },
   getters: {
     getLoginUser: (state) => {
