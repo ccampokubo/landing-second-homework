@@ -3,7 +3,10 @@ import { ref, toRef } from 'vue'
 const emit = defineEmits(['reload'])
 const { t } = useI18n()
 const props = defineProps({
-  id: String | Number,
+  id: {
+    type: String | Number,
+    required: true,
+  },
   status: String,
   service: String,
 })

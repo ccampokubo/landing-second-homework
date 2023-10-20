@@ -35,6 +35,17 @@ export const useOnboarding = defineStore('onboarding', {
 
       return result
     },
+
+    async updatePassword(form: object) {
+      const result = await apiServices({
+        method: 'POST',
+        url: 'onboarding/update-password',
+        data: form,
+        typeHeader: 'auth',
+      })
+
+      return result
+    },
   },
   getters: {
     getLoginUser: (state) => {

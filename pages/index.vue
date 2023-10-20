@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
+import { useField, useForm } from 'vee-validate'
+import * as yup from 'yup'
+
 const store = useOnboarding()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
-import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
+
 const loading = useLoading(ref(false))
-const dataTest = ref([])
 
 definePageMeta({ layout: 'login' })
 
-const { handleSubmit, errors, resetForm, meta } = useForm({
+const { handleSubmit, errors, meta } = useForm({
   validationSchema: yup.object({
     email: yup
       .string()

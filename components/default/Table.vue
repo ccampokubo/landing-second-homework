@@ -52,7 +52,7 @@ const getGoTo = (_prop, _item) => {
               :to="getGoTo(slotProps, item)"
               >{{ searchField(item.field, slotProps.data) }}</nuxt-link
             >
-            <TableStatus
+            <DefaultTableStatus
               v-else-if="item.type === 'state'"
               :id="slotProps.data.id"
               :status="searchField(item.field, slotProps.data)"

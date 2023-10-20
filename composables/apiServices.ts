@@ -52,7 +52,7 @@ export const apiServices = async (setting: setting): Promise<responseApi> => {
       } else if (setting.data) {
         options.headers = {
           ...options.headers,
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
         }
         setting.data = setting.data ? setting.data : {}
         options.body = JSON.stringify(setting.data)
@@ -60,8 +60,10 @@ export const apiServices = async (setting: setting): Promise<responseApi> => {
     }
 
     const { data, error } = await useFetch(setting.url, options)
-    if (error.value) {
+
+    if (!data.value) {
       const errorData = error.value
+      clearNuxtData()
 
       if (errorData.statusCode === 404) {
         if (errorData.data.message) {
@@ -114,13 +116,7 @@ export const apiServices = async (setting: setting): Promise<responseApi> => {
 
     return data.value
   } catch (erdataror) {
-    return {
-      success: false,
-      status: false,
-      code: 101,
-      message: nuxtApp.$i18n.t('store.apiServices.notFound'),
-      error: erdataror,
-    }
+    throw erdataror
   }
 }
 
@@ -171,7 +167,7 @@ export const getHeaders = (type: any) => {
 
 export const generateAccessToken = async () => {
   const config = useRuntimeConfig()
-  let accessToken = useCookie<string>('accessToken')
+  const accessToken = useCookie<string>('accessToken')
 
   try {
     if (!accessToken.value) {

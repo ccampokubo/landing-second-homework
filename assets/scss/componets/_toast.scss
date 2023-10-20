@@ -18,7 +18,7 @@
     width: 60px;
     display: block;
     &::before {
-      content: "";
+      content: '';
       width: 30px;
       height: 30px;
       position: absolute;
@@ -38,7 +38,7 @@
   background: #fc7777 !important;
   border-color: #fc4e4e88 !important;
   .p-toast-message-icon::before {
-    background-image: url("/icons/ic_error.svg");
+    background-image: url('/icons/ic_error.svg');
   }
   .p-toast-detail {
     color: #c32020 !important;
@@ -49,7 +49,7 @@
   background: #ccf0da !important;
   border-color: #2ac869;
   .p-toast-message-icon::before {
-    background-image: url("/icons/ic_success.svg");
+    background-image: url('/icons/ic_success.svg');
   }
   .p-toast-detail {
     color: #2ac869 !important;

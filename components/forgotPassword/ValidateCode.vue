@@ -1,8 +1,9 @@
 <script setup lang="ts">
-const props = defineProps(['user'])
-const emit = defineEmits(['change'])
 import { ref, onMounted } from 'vue'
 import VOtpInput from 'vue3-otp-input'
+
+const props = defineProps(['user'])
+const emit = defineEmits(['change'])
 
 const otpInput = ref<InstanceType<typeof VOtpInput> | null>(null)
 const bindModal = ref('')

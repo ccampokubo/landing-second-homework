@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted, computed, nextTick } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
@@ -35,7 +35,6 @@ const validateRol = (page) => {
 
 onMounted(() => {
   nextTick(() => {
-    console.log(userData)
     if (userData) {
       actualPage.value = route.path
     } else {
@@ -45,14 +44,16 @@ onMounted(() => {
   })
 })
 
-watch(route, (to) => {
-  console.log('cambio vista', to)
-  /* const route = this.validateRol(newVal)
+watch(
+  () => route.path,
+  (newVal, oldVal) => {
+    const route = validateRol(newVal)
 
-  if (route && oldVal !== newVal) {
-    actualPage.value = newVal
-  } */
-})
+    if (route && oldVal !== newVal) {
+      actualPage.value = newVal
+    }
+  },
+)
 </script>
 <template>
   <div class="app-wraper">
@@ -75,7 +76,7 @@ watch(route, (to) => {
     </aside>
     <main class="main-application">
       <nav class="nav-application">
-        <DefaultBreadcrumb />
+        <LayoutsDefaultBreadcrumb />
         <div class="flex gap-2"></div>
       </nav>
       <div class="content-application">

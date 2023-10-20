@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from 'vue'
+import { useField, useForm } from 'vee-validate'
+import * as yup from 'yup'
+
 const router = useRouter()
 const { t } = useI18n()
 const props = defineProps(['user'])
 const localePath = useLocalePath()
-import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
 
-const { handleSubmit, errors, resetForm } = useForm({
+const { handleSubmit, errors } = useForm({
   validationSchema: yup.object({
     password: yup
       .string()
@@ -32,19 +33,14 @@ const { value: confirmPassword } = useField('confirmPassword')
 
 // method
 
-const onSubmit = handleSubmit(async (values) => {
+handleSubmit(async (values) => {
   const formData = { ...values }
   formData.password = enc(formData.password)
   formData.iv = formData.password.iv
   formData.password = formData.password.password
   formData.email = props.user.user
-  console.log(formData)
-  /*  const result = await apiServices({
-    method: 'POST',
-    url: 'onboarding/update-password',
-    data: formData,
-    typeHeader: 'auth',
-  })
+
+  const result = await useOnboarding().updatePassword(formData)
 
   if (result.status && result.code === 100) {
     router.push(localePath({ path: '/' }))
@@ -55,7 +51,7 @@ const onSubmit = handleSubmit(async (values) => {
       detail: result.message,
       life: 3000,
     })
-  } */
+  }
 })
 </script>
 <template>

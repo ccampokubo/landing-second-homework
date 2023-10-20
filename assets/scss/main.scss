@@ -1,25 +1,25 @@
-@import "primevue/resources/themes/lara-light-blue/theme.css";
-@import "primevue/resources/primevue.css";
-@import "primeflex/primeflex.css";
-@import "primeicons/primeicons.css";
+@import 'primevue/resources/themes/lara-light-blue/theme.css';
+@import 'primevue/resources/primevue.css';
+@import 'primeflex/primeflex.css';
+@import 'primeicons/primeicons.css';
 
-@import "componets/input";
-@import "componets/otp-input";
-@import "componets/toast";
-@import "componets/table";
-@import "layouts/login";
-@import "layouts/default";
-@import "utilities/font";
+@import 'componets/input';
+@import 'componets/otp-input';
+@import 'componets/toast';
+@import 'componets/table';
+@import 'layouts/login';
+@import 'layouts/default';
+@import 'utilities/font';
 
 body {
   padding: 0 !important;
   margin: 0 !important;
   font-size: 16px;
   scroll-behavior: smooth;
-  font-family: "OpenSans-Regular";
+  font-family: 'OpenSans-Regular';
   .p-component {
     font-size: 16px;
-    font-family: "OpenSans-Regular";
+    font-family: 'OpenSans-Regular';
   }
 }
 

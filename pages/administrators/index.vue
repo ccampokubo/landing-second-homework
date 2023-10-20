@@ -73,7 +73,7 @@ const getList = async () => {
 </script>
 <template>
   <section class="content-page">
-    <Table
+    <DefaultTable
       :headers="table.headers"
       :fields="table.fields"
       :empty="table.empty"

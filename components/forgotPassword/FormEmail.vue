@@ -1,12 +1,13 @@
 <script setup>
+import { useField, useForm } from 'vee-validate'
+import * as yup from 'yup'
+
 const emit = defineEmits(['change'])
 
 const { t } = useI18n()
 const localePath = useLocalePath()
-import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
 
-const { handleSubmit, errors, resetForm, meta } = useForm({
+const { handleSubmit, errors, meta } = useForm({
   validationSchema: yup.object({
     user: yup
       .string()
