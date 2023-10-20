@@ -48,7 +48,6 @@ export const searchItemJson = (path: string, obj: any) => {
 export const showAlert = (config: showAlertI) => {
   const nuxtApp = useNuxtApp()
   const toast = nuxtApp.$toast
-  config.type = 'error'
   config.duration = 3500
 
   toast.add({

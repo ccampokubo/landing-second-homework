@@ -26,6 +26,16 @@ export const useOnboarding = defineStore('onboarding', {
       return result
     },
 
+    async sendCode(form: object) {
+      const result = await apiServices({
+        method: 'POST',
+        url: 'onboarding/password-recovery',
+        data: form,
+      })
+
+      return result
+    },
+
     async verifyCode(form: object) {
       const result = await apiServices({
         method: 'POST',
@@ -43,6 +53,10 @@ export const useOnboarding = defineStore('onboarding', {
         data: form,
         typeHeader: 'auth',
       })
+
+      if (result.status && result.code === 100) {
+        setLoginUser({ user: undefined, authToken: undefined })
+      }
 
       return result
     },

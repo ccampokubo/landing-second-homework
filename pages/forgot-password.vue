@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 definePageMeta({ layout: 'login' })
 
 const step = ref('email')
 const data = ref({})
+
+onMounted(() => {
+  nextTick(() => {
+    setLoginUser({ user: undefined, authToken: undefined })
+  })
+})
 
 const change = (event: any) => {
   data.value = { ...event.data, ...data.value }

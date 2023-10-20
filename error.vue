@@ -2,7 +2,7 @@
   <div class="error-handle">
     <img src="/img/ic_error.svg" alt="error" />
     <p>{{ error }}</p>
-    <Button @click="handleError" label="Clear errors" />
+    <Button label="Clear errors" @click="handleError" />
   </div>
 </template>
 

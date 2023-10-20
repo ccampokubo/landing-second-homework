@@ -76,7 +76,7 @@ watch(
     </aside>
     <main class="main-application">
       <nav class="nav-application">
-        <LayoutsDefaultBreadcrumb />
+        <LayoutsDefaultBreadcrumb :page="actualPage" />
         <div class="flex gap-2"></div>
       </nav>
       <div class="content-application">

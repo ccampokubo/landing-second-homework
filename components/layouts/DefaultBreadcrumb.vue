@@ -1,22 +1,25 @@
 <script setup>
-import { ref, onMounted, watchEffect, computed } from 'vue'
-const route = useRoute()
-const router = useRouter()
-// variables
-const title = ref('')
-const actualPage = ref('')
-const routePath = computed({
-  get() {
-    return validatePage(actualPage.value)
+import { ref, watch, onMounted } from 'vue'
+const props = defineProps({
+  page: {
+    type: String,
+    required: true,
   },
 })
 
-onMounted(() => {
-  actualPage.value = route.path
-})
+// variables
+const title = ref('')
+const routePath = ref([])
 
-watchEffect(() => {
-  actualPage.value = router.currentRoute.value.path
+watch(
+  () => props.page,
+  (newVal) => {
+    routePath.value = validatePage(newVal)
+  },
+)
+
+onMounted(() => {
+  routePath.value = validatePage(props.page)
 })
 
 const validatePage = (_page) => {
