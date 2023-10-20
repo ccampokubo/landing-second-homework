@@ -1,7 +1,8 @@
 <template>
-  <div>
-    {{ error }}
-    <button @click="handleError">Clear errors</button>
+  <div class="error-handle">
+    <img src="/img/ic_error.svg" alt="error" />
+    <p>{{ error }}</p>
+    <Button @click="handleError" label="Clear errors" />
   </div>
 </template>
 
@@ -12,3 +13,20 @@ const props = defineProps({
 
 const handleError = () => clearError({ redirect: '/' })
 </script>
+<style lang="scss">
+.error-handle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f5f6f6;
+  padding: 3rem 0;
+  height: calc(100%);
+  color: black;
+
+  p {
+    text-align: center;
+    max-width: 550px;
+  }
+}
+</style>

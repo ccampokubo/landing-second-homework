@@ -58,7 +58,6 @@ const getList = async () => {
   const result = await apiServices({
     method: 'POST',
     url: 'admin/list',
-    api: 'http://lazyapibo.inkubo.co/v1/',
     data: form.value,
   })
 

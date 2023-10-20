@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import sass from 'sass'
 export default defineNuxtConfig({
-  cache: {
-    components: true,
+  devtools: {
+    enabled: false,
   },
 
   nitro: {
@@ -42,7 +42,26 @@ export default defineNuxtConfig({
   },
 
   // modules
-  modules: ['@nuxtjs/i18n'],
+  modules: ['@nuxtjs/i18n', '@pinia/nuxt', 'nuxt-primevue'],
+
+  // primevue
+  primevue: {
+    usePrimeVue: true,
+    options: {
+      ripple: true,
+    },
+    components: {
+      include: [
+        'Button',
+        'InputText',
+        'Toast',
+        'DataTable',
+        'Column',
+        'Paginator',
+        'Menu',
+      ],
+    },
+  },
 
   // buildModules
   buildModules: [
@@ -69,16 +88,7 @@ export default defineNuxtConfig({
         whitelistPatterns: [/prime-/, /p-/, /pf-/],
       },
     ],
-    '@nuxtjs/eslint-module',
   ],
-
-  // eslint
-  eslint: {
-    extend(config) {
-      // Ejemplo: Habilitar reglas adicionales
-      config.rules['vue/no-unused-components'] = 'error'
-    },
-  },
 
   // translator
   i18n: {

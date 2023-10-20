@@ -10,14 +10,10 @@ const time = ref(30)
 const interval = ref()
 
 const handleOnComplete = async (value: string) => {
-  const result = (await apiServices({
-    method: 'POST',
-    url: 'onboarding/verify-code',
-    data: {
-      user: props.user?.user,
-      code: value,
-    },
-  })) as any
+  const result = await useOnboarding().verifyCode({
+    user: props.user?.user,
+    code: value,
+  })
 
   if (result.status && result.code === 100) {
     emit('change', { data: props.user, change: 'changePassword' })

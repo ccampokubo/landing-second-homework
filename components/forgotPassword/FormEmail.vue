@@ -20,11 +20,7 @@ const { value: user } = useField('user')
 
 // methods
 const onSubmit = handleSubmit(async (values) => {
-  const result = await apiServices({
-    method: 'POST',
-    url: 'onboarding/password-recovery',
-    data: values,
-  })
+  const result = await useOnboarding().passwordRecovery(values)
 
   if (result.status && result.code === 100) {
     emit('change', { data: values, change: 'validateCode' })

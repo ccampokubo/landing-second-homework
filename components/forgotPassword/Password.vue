@@ -38,8 +38,8 @@ const onSubmit = handleSubmit(async (values) => {
   formData.iv = formData.password.iv
   formData.password = formData.password.password
   formData.email = props.user.user
-
-  const result = await apiServices({
+  console.log(formData)
+  /*  const result = await apiServices({
     method: 'POST',
     url: 'onboarding/update-password',
     data: formData,
@@ -55,7 +55,7 @@ const onSubmit = handleSubmit(async (values) => {
       detail: result.message,
       life: 3000,
     })
-  }
+  } */
 })
 </script>
 <template>
