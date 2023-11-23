@@ -1,7 +1,9 @@
 <template>
-  <GeneralLoading />
-  <NuxtLayout>
-    <NuxtPage />
-    <Toast position="bottom-left" />
-  </NuxtLayout>
+  <main>
+    <GeneralLoading />
+    <NuxtLayout>
+      <NuxtPage />
+      <Toast position="bottom-left" />
+    </NuxtLayout>
+  </main>
 </template>

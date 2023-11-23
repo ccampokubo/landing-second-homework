@@ -1,5 +1,4 @@
 import type { UseFetchOptions } from 'nuxt/app'
-import { defu } from 'defu'
 import { useOnboarding } from '../stores/Onboarding'
 
 interface setting {

@@ -2,7 +2,13 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
-
+  css: ['~/assets/css/main.css', '@/assets/scss/main.scss'],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   imports: {
     dirs: [
       'composables',
@@ -36,9 +42,6 @@ export default defineNuxtConfig({
       SHORT_NAME: process.env.SHORT_NAME,
     },
   },
-
-  // css
-  css: ['@/assets/scss/main.scss'],
 
   // modules
   modules: [
