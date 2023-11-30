@@ -17,17 +17,6 @@
           <img src="/icons/arrow_down.svg" alt="Arrow down icon" />
         </span>
       </div>
-      <div class="lg:tw-hidden">
-        <img src="/icons/burger.svg" alt="Burger icon" />
-      </div>
-      <div class="tw-hidden lg:tw-block">
-        <ul class="tw-flex tw-gap-x-14">
-          <li>Inicio</li>
-          <li>Servicios</li>
-          <li>Expertos</li>
-          <li>Blog</li>
-        </ul>
-      </div>
       <div class="tw-hidden lg:tw-block">
         <button>Contáctanos</button>
       </div>
@@ -127,6 +116,109 @@
         </div>
       </div>
     </section>
+    <section>
+      <h2
+        class="tw-text-[45px] tw-font-bold tw-text-center tw-pt-10 tw-pb-[104px] tw-text-primary"
+      >
+        ¿Por qué escoger Kubo?
+      </h2>
+      <div class="tw-flex tw-justify-between tw-px-[174px]">
+        <div
+          v-for="(reason, key) in listReasons"
+          :key="key"
+          class="tw-flex tw-flex-col tw-items-center"
+        >
+          <img :class="reason.class" :src="reason.image" alt="Icon" />
+          <p
+            class="tw-pt-8 tw-text-[28px] tw-text-center"
+            :class="[key < 2 ? 'tw-w-[240px]' : 'tw-w-[220px]']"
+          >
+            {{ reason.text }}
+          </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2
+        class="tw-text-[45px] tw-font-medium tw-w-[720px] tw-text-center tw-mx-auto"
+      >
+        Estos son algunos de los clientes que
+        <span class="tw-font-bold">han confiado en nosotros</span>
+      </h2>
+      <p class="tw-text-xl tw-w-[360px] tw-text-center tw-mx-auto tw-pt-6">
+        Trabajamos junto a ellos para
+      </p>
+      <p class="tw-text-xl tw-w-[380px] tw-text-center tw-mx-auto">
+        dar vida a sus apps móviles y sitios web.
+      </p>
+      <p
+        class="tw-text-xl tw-w-[420px] tw-text-[#67CEFC] tw-text-center tw-mx-auto tw-font-semibold tw-pb-6"
+      >
+        ¡Selecciona y descubre quienes nos eligieron!
+      </p>
+      <div class="tw-flex tw-justify-center tw-gap-x-[122px]">
+        <div>
+          <label class="tw-text-xl tw-text-primary tw-font-medium">
+            <input id="companies" type="radio" name="companies" />
+            Empresas
+          </label>
+        </div>
+        <div>
+          <label class="tw-text-xl tw-text-primary tw-font-medium">
+            <input id="startups" type="radio" name="startups" />
+            Startups
+          </label>
+        </div>
+        <div>
+          <label class="tw-text-xl tw-text-primary tw-font-medium">
+            <input id="goverment" type="radio" name="goverment" />
+            Gobierno
+          </label>
+        </div>
+      </div>
+      <div
+        class="tw-flex tw-justify-between tw-items-center tw-px-[74px] tw-pt-[126px] tw-pb-[280px]"
+      >
+        <div v-for="(logo, key) in listLogoCompanies" :key="key">
+          <img :class="logo.class" :src="logo.src" alt="Logo" />
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="tw-flex tw-flex-col tw-items-center">
+        <h2 class="tw-text-[45px] tw-font-bold tw-pb-5">Kubo news</h2>
+        <h3 class="tw-text-xl tw-font-semibold">¿Qué hay de nuevo?</h3>
+        <p class="">Descubre aquí las últimas maravillas del mundo digital</p>
+      </div>
+      <div class="tw-flex tw-px-[74px] tw-gap-x-16 tw-pt-[101px]">
+        <div
+          class="tw-bg-[#151521] tw-w-[578px] tw-h-[384px] tw-p-[38px] tw-rounded-[31px]"
+        >
+          <h2 class="tw-text-2xl tw-font-bold tw-w-[80%]">
+            Los Avances de la Inteligencia Artificial
+          </h2>
+          <p class="tw-pt-5 tw-pb-[72px] tw-w-[90%]">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+            commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+            penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+          <button>Entérate</button>
+        </div>
+        <div
+          class="tw-bg-[#151521] tw-w-[578px] tw-h-[384px] tw-p-[38px] tw-rounded-[31px]"
+        >
+          <h2 class="tw-text-2xl tw-font-bold tw-w-[80%]">
+            Los Avances de la Inteligencia Artificial
+          </h2>
+          <p class="tw-pt-5 tw-pb-[72px] tw-w-[90%]">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+            commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+            penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+          <button>Entérate</button>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -149,6 +241,43 @@ const listIconsCompanies = [
   },
   {
     src: '/icons/ic_beri_cool.svg',
+  },
+]
+
+const listReasons = [
+  {
+    text: 'Más de 15 años de experiencia',
+    image: '/img/gorro-expertos@2x.png',
+    class: 'tw-h-[235px]',
+  },
+  {
+    text: '150 proyectos realizados',
+    image: '/img/medalla-expertos@2x.png',
+    class: 'tw-h-[235px]',
+  },
+  {
+    text: 'Modelos de pago especiales',
+    image: '/img/pagos-expertos@2x.png',
+    class: 'tw-h-[228px]',
+  },
+]
+
+const listLogoCompanies = [
+  {
+    src: '/img/KPMG@2x.png',
+    class: 'tw-w-[221px]',
+  },
+  {
+    src: '/img/Herbalife@2x.png',
+    class: 'tw-w-[176px]',
+  },
+  {
+    src: '/img/Sura@2x.png',
+    class: 'tw-w-[221px]',
+  },
+  {
+    src: '/img/Bayer@2x.png',
+    class: 'tw-w-[144px]',
   },
 ]
 </script>
