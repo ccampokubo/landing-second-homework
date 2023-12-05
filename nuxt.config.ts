@@ -67,6 +67,7 @@ export default defineNuxtConfig({
         'Paginator',
         'Menu',
         'Dialog',
+        'Dropdown',
       ],
     },
   },

@@ -17,15 +17,19 @@
           <img src="/icons/arrow_down.svg" alt="Arrow down icon" />
         </span>
       </div>
-      <div class="tw-hidden lg:tw-block">
-        <button>Contáctanos</button>
+      <div>
+        <button class="tw-bg-[#6B1DBE] tw-px-4 tw-py-1 tw-rounded-md">
+          Contáctanos
+        </button>
       </div>
     </header>
-    <section class="tw-flex tw-justify-between tw-px-24 tw-pt-28">
-      <div class="tw-w-[345px]">
-        <h1 class="tw-text-4xl tw-font-bold">
+    <section
+      class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-between tw-px-6 lg:tw-px-24 tw-pt-[70px] lg:tw-pt-28"
+    >
+      <div class="tw-w-[276px] lg:tw-w-[345px]">
+        <h1 class="tw-text-[28px] lg:tw-text-4xl tw-font-bold">
           Da el primer paso para crear tu app,
-          <span>Ellos ya lo hicieron</span>:
+          <span class="tw-text-primary">Ellos ya lo hicieron</span>:
         </h1>
         <div
           class="tw-grid tw-grid-cols-2 tw-gap-y-10 tw-items-center tw-pt-16"
@@ -39,53 +43,69 @@
           </div>
         </div>
       </div>
-      <div class="tw-w-[645px]">
-        <form action="" class="tw-grid tw-grid-cols-3 tw-gap-x-10 tw-gap-y-5">
-          <div class="tw-col-span-3">
-            <input class="tw-w-full" type="text" />
+      <div class="tw-w-full lg:tw-w-[645px] tw-mt-16 lg:tw-mt-0">
+        <form
+          action=""
+          class="tw-grid tw-grid-cols-4 lg:tw-grid-cols-3 tw-gap-2 lg:tw-gap-x-10 tw-gap-y-5"
+        >
+          <div class="tw-col-span-4 lg:tw-col-span-3">
+            <label class="tw-text-xs">Nombre*</label>
+            <input class="tw-w-full tw-mt-4" type="text" />
           </div>
-          <div class="tw-col-span-3">
-            <input class="tw-w-full" type="text" />
+          <div class="tw-col-span-4 lg:tw-col-span-3">
+            <label class="tw-text-xs">Apellido*</label>
+            <input class="tw-w-full tw-mt-4" type="text" />
           </div>
-          <div><input class="tw-w-full" type="text" /></div>
           <div class="tw-col-span-2">
-            <input class="tw-w-full" type="text" />
+            <label class="tw-text-xs">País</label>
+            <Dropdown class="tw-w-full tw-mt-4" />
+          </div>
+          <div class="tw-col-span-2">
+            <label class="tw-text-xs">Número de teléfono</label>
+            <input class="tw-w-full tw-mt-4" type="text" />
+          </div>
+          <div class="tw-col-span-2">
+            <button class="tw-bg-secondary tw-px-5 tw-py-2 tw-rounded-lg">
+              Enviar
+            </button>
           </div>
         </form>
       </div>
     </section>
-    <section class="tw-px-[173px] tw-pt-[164px]">
-      <div class="tw-w-[642px] tw-mx-auto">
-        <h1 class="tw-text-[45px] tw-font-bold tw-text-center">
+    <section class="tw-px-8 lg:tw-px-[173px] tw-pt-[164px]">
+      <div class="tw-w-full lg:tw-w-[642px] tw-mx-auto">
+        <h1
+          class="tw-text-[26px] lg:tw-text-[45px] tw-font-bold tw-text-center"
+        >
           Somos Kubo una empresa de desarrollo de software
         </h1>
         <h2
-          class="tw-text-[45px] tw-font-bold tw-text-center tw-pt-10 tw-pb-[104px] tw-text-primary"
+          class="tw-text-[26px] lg:tw-text-[45px] tw-font-bold tw-text-center tw-pt-10 tw-pb-[104px] tw-text-primary"
         >
           ¿Qué ofrecemos?
         </h2>
       </div>
-      <div class="tw-flex tw-flex-col tw-gap-y-[104px]">
-        <div class="tw-flex tw-gap-x-[102px] tw-items-center">
+      <div class="tw-flex tw-flex-col lg:tw-gap-y-[104px]">
+        <div class="tw-flex tw-flex-col tw-gap-x-[102px] tw-items-center">
           <div class="tw-flex-none">
             <img
-              class="tw-w-[347px]"
+              class="tw-max-w-none tw-w-[325px] lg:tw-w-[347px]"
               src="/img/celular-servicios@2x.png"
               alt=""
             />
           </div>
-          <div class="tw-w-[392px]">
-            <h1 class="tw-text-[28px] tw-font-bold">
+          <div class="tw-w-[308px] lg:tw-w-[392px]">
+            <h1 class="tw-text-[22px] lg:tw-text-[28px] tw-font-bold">
               Desarrollo de apps multiplataforma y nativas
             </h1>
-            <p class="tw-text-xl tw-w-[367px]">
+            <p class="tw-text-sm lg:tw-text-xl tw-w-[280px] lg:tw-w-[367px]">
               Desarrollamos aplicaciones móviles que generan ventajas
               competitivas en el mercado
             </p>
           </div>
         </div>
         <div
-          class="tw-flex tw-flex-row-reverse tw-gap-x-[102px] tw-items-center"
+          class="tw-flex tw-flex-col lg:tw-flex-row-reverse tw-gap-x-[102px] tw-items-center"
         >
           <div class="tw-flex-none">
             <img
@@ -102,7 +122,7 @@
             </p>
           </div>
         </div>
-        <div class="tw-flex tw-gap-x-[102px] tw-items-center">
+        <div class="tw-flex tw-flex-col tw-gap-x-[102px] tw-items-center">
           <div class="tw-flex-none">
             <img class="tw-w-[347px]" src="/img/lupa-servicios@2x.png" alt="" />
           </div>
@@ -122,7 +142,9 @@
       >
         ¿Por qué escoger Kubo?
       </h2>
-      <div class="tw-flex tw-justify-between tw-px-[174px]">
+      <div
+        class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-between tw-px-[174px]"
+      >
         <div
           v-for="(reason, key) in listReasons"
           :key="key"
@@ -140,23 +162,25 @@
     </section>
     <section>
       <h2
-        class="tw-text-[45px] tw-font-medium tw-w-[720px] tw-text-center tw-mx-auto"
+        class="tw-text-[45px] tw-font-medium tw-w-full lg:tw-w-[720px] tw-text-center tw-mx-auto"
       >
         Estos son algunos de los clientes que
         <span class="tw-font-bold">han confiado en nosotros</span>
       </h2>
-      <p class="tw-text-xl tw-w-[360px] tw-text-center tw-mx-auto tw-pt-6">
+      <p
+        class="tw-text-xl tw-w-full lg:tw-w-[360px] tw-text-center tw-mx-auto tw-pt-6"
+      >
         Trabajamos junto a ellos para
       </p>
-      <p class="tw-text-xl tw-w-[380px] tw-text-center tw-mx-auto">
+      <p class="tw-text-xl tw-w-full lg:tw-w-[380px] tw-text-center tw-mx-auto">
         dar vida a sus apps móviles y sitios web.
       </p>
       <p
-        class="tw-text-xl tw-w-[420px] tw-text-[#67CEFC] tw-text-center tw-mx-auto tw-font-semibold tw-pb-6"
+        class="tw-text-xl tw-w-full lg:tw-w-[420px] tw-text-[#67CEFC] tw-text-center tw-mx-auto tw-font-semibold tw-pb-6"
       >
         ¡Selecciona y descubre quienes nos eligieron!
       </p>
-      <div class="tw-flex tw-justify-center tw-gap-x-[122px]">
+      <div class="tw-flex tw-justify-center lg:tw-gap-x-[122px]">
         <div>
           <label class="tw-text-xl tw-text-primary tw-font-medium">
             <input id="companies" type="radio" name="companies" />
@@ -190,9 +214,11 @@
         <h3 class="tw-text-xl tw-font-semibold">¿Qué hay de nuevo?</h3>
         <p class="">Descubre aquí las últimas maravillas del mundo digital</p>
       </div>
-      <div class="tw-flex tw-px-[74px] tw-gap-x-16 tw-pt-[101px]">
+      <div
+        class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center tw-gap-y-16 lg:tw-gap-y-0 lg:tw-gap-x-16 tw-pt-[101px] tw-px-6"
+      >
         <div
-          class="tw-bg-[#151521] tw-w-[578px] tw-h-[384px] tw-p-[38px] tw-rounded-[31px]"
+          class="tw-bg-[#151521] tw-w-full lg:tw-w-[578px] tw-h-full lg:tw-h-[384px] tw-p-[38px] tw-rounded-[31px]"
         >
           <h2 class="tw-text-2xl tw-font-bold tw-w-[80%]">
             Los Avances de la Inteligencia Artificial
@@ -205,7 +231,7 @@
           <button>Entérate</button>
         </div>
         <div
-          class="tw-bg-[#151521] tw-w-[578px] tw-h-[384px] tw-p-[38px] tw-rounded-[31px]"
+          class="tw-bg-[#151521] tw-w-full lg:tw-w-[578px] tw-h-full lg:tw-h-[384px] tw-p-[38px] tw-rounded-[31px]"
         >
           <h2 class="tw-text-2xl tw-font-bold tw-w-[80%]">
             Los Avances de la Inteligencia Artificial
@@ -219,10 +245,50 @@
         </div>
       </div>
     </section>
+    <section class="tw-flex tw-flex-col lg:tw-justify-center">
+      <div class="tw-px-8 lg:tw-px-0">
+        <h1
+          class="tw-text-3xl lg:tw-text-[45px] tw-font-bold tw-text-primary tw-w-[220px] lg:tw-w-[405px] tw-mb-8"
+        >
+          ¿Listo para dar vida a tu idea?
+        </h1>
+        <p
+          class="tw-font-bold tw-w-[290px] lg:tw-w-[380px] tw-text-[26px] lg:tw-text-[28px] tw-mb-14"
+        >
+          Creamos apps y damos vida a negocios exitosos
+        </p>
+        <img
+          class="tw-w-[300px] tw-mx-auto lg:tw-w-[445px]"
+          src="/img/binoculares-servicios@2x.png"
+          alt="Icon binoculares"
+        />
+      </div>
+      <div class="tw-w-full lg:tw-w-[645px]">
+        <form
+          action=""
+          class="tw-grid tw-grid-cols-4 lg:tw-grid-cols-3 tw-gap-x-10 tw-gap-y-5"
+        >
+          <div class="tw-col-span-4 lg:tw-col-span-3">
+            <input class="tw-w-full" type="text" />
+          </div>
+          <div class="tw-col-span-4 lg:tw-col-span-3">
+            <input class="tw-w-full" type="text" />
+          </div>
+          <div class="tw-col-span-2">
+            <input class="tw-w-full" type="text" />
+          </div>
+          <div class="tw-col-span-2">
+            <input class="tw-w-full" type="text" />
+          </div>
+        </form>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import type Dropdown from 'primevue/dropdown'
+
 const listIconsCompanies = [
   {
     src: '/icons/ic_laika.svg',
@@ -282,4 +348,9 @@ const listLogoCompanies = [
 ]
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+input {
+  border-radius: 10px;
+  padding: 11.5px 0px;
+}
+</style>
